@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
-const { mkdirSync, existsSync } = require('fs');
 const { spawn } = require('child_process');
 const kyoushinMonitor = require('./cache/KyoushinMonitor');
 const kyoushinEEW = require('./cache/KyoushinEEW');
@@ -12,10 +11,6 @@ app.use(express.urlencoded({
     extended: true,
 }));
 app.use(express.json());
-
-if (!existsSync('dat')) {
-    mkdirSync('dat');
-}
 
 app.get('/', (req, res) => {
     res.send('success');
