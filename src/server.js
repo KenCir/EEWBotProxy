@@ -32,4 +32,8 @@ setInterval(() => {
     spawn('php', ['QuakeInfo.php']);
 }, 15000);
 
+process.on('unhandledRejection', (reason) => {
+    console.error(reason);
+});
+
 app.listen(process.env.PORT, () => console.log(`Server Listening http://localhost:${process.env.PORT}`));
