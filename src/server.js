@@ -1,12 +1,12 @@
 require('dotenv').config();
+const logger = require('./modules/logger');
 const express = require('express');
-const logger = require('morgan');
 const { spawn } = require('child_process');
 const kyoushinMonitor = require('./cache/KyoushinMonitor');
 const kyoushinEEW = require('./cache/KyoushinEEW');
 const p2p = require('./cache/P2P');
 const app = express();
-app.use(logger('dev'));
+app.use(logger.express);
 app.use(express.urlencoded({
     extended: true,
 }));
@@ -33,7 +33,7 @@ setInterval(() => {
 }, 15000);
 
 process.on('unhandledRejection', (reason) => {
-    console.error(reason);
+    logger.error.error(reason);
 });
 
 app.listen(process.env.PORT, () => console.log(`Server Listening http://localhost:${process.env.PORT}`));
